@@ -1,0 +1,92 @@
+<%= form_for @car, :html => { :multipart => true }   do |f| %>
+<div class="col-md-3">
+<%= image_tag @car.image,size:"700", class:"img-responsive"%>
+</div>
+<div class="col-md-9">
+ <div class="col-md-12"> 
+ <h4><%= @car.marka %></h4>
+  <hr>
+  </div>
+ <div class="col-md-3">
+   <strong>model</strong>
+  <%=@car.model%>
+  </div>
+<div class="col-md-3">
+   <strong>telefon</strong>
+  <%=@car.telefon%>
+  </div>
+  <div class="col-md-6">
+  <strong>cena</strong>
+  <%=@car.cena%>
+  </div>
+   <div class="col-md-12">
+   <hr>
+   <strong>opis</strong>
+  <%=simple_format @car.opis%>
+ </div>
+</div>
+<br>
+<div class="col-md-12">
+<br>
+ <h4>galeria miniatur </h4>
+</div>
+<br>
+
+<%= f.fields_for  :azzets do |azzet_fields| %> 
+  <% unless azzet_fields.object.new_record? %>
+ 
+  <%= link_to image_tag(azzet_fields.object.inage.url(:thumb)) ,
+             azzet_fields.object.inage.url(:original) %>
+
+<%end%> 
+<%end%>
+<br>
+<h3><strong> Galeria zdjec</strong> </h3>
+<br>
+<div style="background-color:black" >
+  <div id='carousel-custom' class='carousel slide' data-ride='carousel'>
+        <div class='carousel-outer'>
+            <!-- Wrapper for slides -->
+            <div class='carousel-inner'>
+                <div class='item active'>
+                    <%= image_tag @car.image, class:"img-responsive"%>
+                </div>
+
+      <%= f.fields_for  :azzets do |azzet_fields| %> 
+        <% unless azzet_fields.object.new_record? %>
+                <div class='item'>
+                    <%= link_to image_tag(azzet_fields.object.inage.url(:medium)) %>
+                </div>
+                <%end%> 
+                <%end%>
+            </div>
+
+            <!-- Controls -->
+            <a class='left carousel-control' href='#carousel-custom' data-slide='prev'>
+                <span class='glyphicon glyphicon-chevron-left'></span>
+            </a>
+            <a class='right carousel-control' href='#carousel-custom' data-slide='next'>
+                <span class='glyphicon glyphicon-chevron-right'></span>
+            </a>
+        </div>
+
+        <!-- Indicators -->
+        <ol class='carousel-indicators'>
+          <li data-target='#carousel-custom' data-slide-to='0' class='active'><%= image_tag @car.image,size:"160", class:"img-responsive"%></li>
+   <%= f.fields_for  :azzets do |azzet_fields| %> 
+        <% unless azzet_fields.object.new_record? %>
+            <li data-target='#carousel-custom' data-slide-to='<%=@t+1%>'><%= link_to image_tag(azzet_fields.object.inage.url(:thumb)) %></li>
+            <% @t=@t+1 %>
+      <%end%> 
+                <%end%>
+        </ol>
+    </div>
+  </div>
+    
+    <script src='js/jquery-1.11.0.min.js'></script>
+    <script src='bootstrap/js/bootstrap.min.js'></script>
+
+<%end%>
+<%= link_to 'Edit', edit_car_path(@car) %> |
+<%= link_to 'Back', cars_path %>
+

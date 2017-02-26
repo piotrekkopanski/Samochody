@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  marka: MyString
+  model: MyString
+  opis: MyText
+  rocznik: 9.99
+  cena: 9.99
+
+two:
+  marka: MyString
+  model: MyString
+  opis: MyText
+  rocznik: 9.99
+  cena: 9.99

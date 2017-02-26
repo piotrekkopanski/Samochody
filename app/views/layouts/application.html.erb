@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE" />
+    <meta charset="UTF-8">
+    
+    <link href='bootstrap/css/bootstrap.min.css' rel='stylesheet' />
+    <style type='text/css'>
+        #carousel-custom {
+            margin: 20px auto;
+            width: 1100px;
+        }
+        #carousel-custom .carousel-indicators {
+            margin: 10px 0 0;
+            overflow: auto;
+            position: static;
+            text-align: left;
+            white-space: nowrap;
+            width: 100%;
+        }
+        #carousel-custom .carousel-indicators li {
+            background-color: transparent;
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            display: inline-block;
+            height: auto;
+            margin: 0 !important;
+            width: auto;
+        }
+        #carousel-custom .carousel-indicators li img {
+            display: block;
+        }
+        #carousel-custom .carousel-outer {
+            position: relative;
+        }
+    </style>
+
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  <style>
+  .carousel-inner > .item > img,
+  .carousel-inner > .item > a > img {
+      width: 170%;
+      margin: auto;
+  }
+  </style>
+
+
+  <title>Samochody na sprzedaż</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body style="background-color:#D7F7DD">
+<nav  class="navbar navbar-inverse">
+  <div  class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="/cars">
+        Samochody na sprzedaż
+      </a>
+    </div>
+ <ul class="navbar navbar-nav navbar-right">
+ <% if admin_signed_in? %>
+  <font color="green"><h4><li><%= link_to "Wyloguj",destroy_admin_session_url,:method =>'delete' %></li></h4></font>
+  <% else %>
+<font color="green"><h4><li><%=link_to "Zaloguj", new_admin_session_url%></li></h4></font>
+ <% end %>
+</ul>
+   </div>
+ </nav>
+<div class="container-fluid" >
+  <div class="row">
+   <div class="col-md-12">
+
+
+<%=  yield %>
+</div>
+</div>
+</div>
+</body>
+</html>
+

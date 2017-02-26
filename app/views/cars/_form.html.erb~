@@ -1,0 +1,58 @@
+<%= form_for @car, :html => { :multipart => true } do |f| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :marka %><br>
+    <%= f.text_field :marka %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br>
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :opis %><br>
+    <%= f.text_area :opis %>
+  </div>
+  <div class="field">
+    <%= f.label :rocznik %><br>
+    <%= f.text_field :rocznik %>
+  </div>
+  <div class="field">
+    <%= f.label :cena %><br>
+    <%= f.text_field :cena %>
+  </div>
+  <div class="field">
+    <%= f.label :zdjecie_profilowe %><br>
+    <%= f.file_field :image %>
+  </div>
+ <h4>galeria zdjec </h4>
+ <%= f.fields_for :azzets do |azzet_fields| %>
+<% if azzet_fields.object.new_record? %>
+<p>
+ <%= azzet_fields.file_field :inage %>
+ </p>
+<% end %>
+<% end %>
+<h4>galeria zdjec </h4> zaznacz zeby usunac <input type="checkbox" >
+<%= f.fields_for  :azzets do |azzet_fields| %> 
+  <% unless azzet_fields.object.new_record? %>
+  <%= link_to image_tag(azzet_fields.object.inage.url(:thumb)),
+             azzet_fields.object.inage.url(:original) %>
+            <%= azzet_fields.check_box :_destroy  %>
+ <%end%>
+<%end%>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
